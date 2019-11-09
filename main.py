@@ -1,6 +1,32 @@
 import getpass
 import os
 
+accounts_list = {
+    '0001-02': {
+        'password': '123456',
+        'name': 'Fuladno da Silva',
+        'value': 1500,
+        'admin': False
+    },
+    '0002-02': {
+        'password': '123456',
+        'name': 'Fulada de tal',
+        'value': 2000,
+        'admin': False
+    },
+    '1111-11': {
+        'password': '123456',
+        'name': 'Admin da Silva',
+        'value': 2000,
+        'admin': True
+    }
+}
+money_slips = {
+    '20': 5,
+    '50': 5,
+    '100': 5,
+}
+
 # enquanto o while for true o programa fica em execução
 while True:
     print ('****************************************')
@@ -9,33 +35,7 @@ while True:
     account_typed = input('Digite sua conta: ')
     password_typed = getpass.getpass('Digite sua senha: ')
 
-    accounts_list = {
-        '0001-02': {
-            'password': '123456',
-            'name': 'Fuladno da Silva',
-            'value': 1500,
-            'admin': False
-        },
-        '0002-02': {
-            'password': '123456',
-            'name': 'Fulada de tal',
-            'value': 2000,
-            'admin': False
-        },
-        '1111-11': {
-            'password': '123456',
-            'name': 'Admin da Silva',
-            'value': 2000,
-            'admin': True
-        }
-    }
-    money_slips = {
-        '20': 5,
-        '50': 5,
-        '100': 5,
-    }
-
-    if  account_typed in accounts_list and password_typed == accounts_list[account_typed]['password']:
+    if account_typed in accounts_list and password_typed == accounts_list[account_typed]['password']:
         # limpa a tela do terminal
         os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -46,7 +46,7 @@ while True:
         print ('2 - Saque')
         if accounts_list[account_typed]['admin']:
             print ('10 - Incluir cédulas')
-        option_typed = input ('escolha uma das opcoes acima: ')
+        option_typed = input('escolha uma das opcoes acima: ')
         if option_typed == '1':
             print('Seu saldo é %s' % accounts_list[account_typed]['value'])
         elif option_typed == '10' and accounts_list[account_typed]['admin']:
@@ -61,21 +61,23 @@ while True:
             money_slips_user = {}
             value_int = int(value_typed)
 
-            if value_int // 100 > 0 and value_int //100 <= money_slips['100']:
+            if value_int // 100 > 0 and value_int // 100 <= money_slips['100']:
                 money_slips_user['100'] = value_int // 100
                 value_int = value_int - value_int // 100 * 100
 
-            if value_int // 50 > 0 and value_int //50 <= money_slips['50']:
+            if value_int // 50 > 0 and value_int // 50 <= money_slips['50']:
                 money_slips_user['50'] = value_int // 50
                 value_int = value_int - value_int // 50 * 50
 
-            if value_int // 20 > 0 and value_int //20 <= money_slips['20']:
+            if value_int // 20 > 0 and value_int // 20 <= money_slips['20']:
                 money_slips_user['20'] = value_int // 20
                 value_int = value_int - value_int // 20 * 20
 
             if value_int != 0:
                 print ('O caixa não tem cédulas disponiveis para este valor')
             else:
+                for money_bill in money_slips_user:
+                    money_slips[money_bill] -= money_slips_user[money_bill]
                 print ('Pegue as notas: ')
                 print (money_slips_user)
 
