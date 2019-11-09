@@ -30,4 +30,4 @@ while True:
             print('Seu saldo é %s' % accounts_list[account_typed]['value'])
 
     else:
-        print ('Conta invalida')
+        print ('\n!!!!!!!!!!  Conta invalida  !!!!!!!!!!!!\n')
