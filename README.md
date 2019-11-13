@@ -1,4 +1,4 @@
-##Iniciando com Python
+## Iniciando com Python
 
 programa que simula um caixa eletrônico
 
