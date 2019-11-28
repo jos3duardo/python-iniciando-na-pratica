@@ -27,21 +27,15 @@ money_slips = {
     '100': 5,
 }
 
-# enquanto o while for true o programa fica em execução
-while True:
-    print ('****************************************')
-    print ('*********** Caixa Eletronico ***********')
-    print ('****************************************')
+
+def main():
+    header()
     account_typed = input('Digite sua conta: ')
     password_typed = getpass.getpass('Digite sua senha: ')
 
     if account_typed in accounts_list and password_typed == accounts_list[account_typed]['password']:
-        # limpa a tela do terminal
-        os.system('cls' if os.name == 'nt' else 'clear')
-
-        print ('****************************************')
-        print ('*********** Caixa Eletronico ***********')
-        print ('****************************************')
+        clear()
+        header()
         print ('1 - Saldo')
         print ('2 - Saque')
         if accounts_list[account_typed]['admin']:
@@ -80,11 +74,30 @@ while True:
                     money_slips[money_bill] -= money_slips_user[money_bill]
                 print ('Pegue as notas: ')
                 print (money_slips_user)
-
     else:
         print ('\n!!!!!!!!!!  Conta invalida  !!!!!!!!!!!!\n')
 
+
+# limpa a tela do terminal
+def clear():
+    clear = 'cls' if os.name == 'nt' else 'clear'
+    os.system(clear)
+
+
+def header():
+    print ('****************************************')
+    print ('*********** Caixa Eletronico ***********')
+    print ('****************************************')
+
+
+# pausa do programa
+def pause():
     input('Presione <ENTER> para continuar ...')
 
-    # limpa a tela do terminal
-    os.system('cls' if os.name == 'nt' else 'clear')
+
+# enquanto o while for true o programa fica em execução
+while True:
+    main()
+    pause()
+    clear()
+
