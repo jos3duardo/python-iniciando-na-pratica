@@ -60,5 +60,7 @@ def load_bank_data():
     read_money_slips(file)
 
 
-
-
+def delete_file():
+    file = open(BASE_PATH + '/_file_to_delete.dat', 'w')
+    file.close()
+    os.unlink(BASE_PATH + '/_file_to_delete.dat')
