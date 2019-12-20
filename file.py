@@ -1,5 +1,5 @@
 import os
-from bank_account_variables import money_slips
+from bank_account_variables import money_slips, accounts_list
 
 
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -19,6 +19,18 @@ def open_file_bank(mode):
 def write_money_slips(file):
     for money_bill, value in money_slips.items():
         file.write(money_bill + '=' + str(value) + ';')
+
+
+def write_bank_accounts(file):
+    for account, account_data in accounts_list.items():
+        file.writelines((
+            account, ';',
+            account_data['name'], ';',
+            account_data['password'], ';',
+            str(account_data['value']), ';',
+            str(account_data['admin']), ';'
+            '\n'
+        ))
 
 
 def read_money_slips(file):
@@ -46,3 +58,7 @@ def set_money_bill_value(money_bill_value):
 def load_bank_data():
     file = open_file_bank('r')
     read_money_slips(file)
+
+
+
+
