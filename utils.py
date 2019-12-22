@@ -1,5 +1,6 @@
 import os
 
+
 # limpa a tela do terminal
 def clear():
     clear = 'cls' if os.name == 'nt' else 'clear'
