@@ -1,12 +1,13 @@
 import utils
 import operations
 from file import load_bank_data
-from bank_account_variables import money_slips
+from bank_account_variables import money_slips,accounts_list
 
 
 def main():
     load_bank_data()
     print(money_slips)
+    print(accounts_list)
     utils.header()
 
     account_auth = operations.auth_account()

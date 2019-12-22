@@ -55,9 +55,41 @@ def set_money_bill_value(money_bill_value):
     money_slips[money_bill] = int(value)
 
 
+def read_bank_accounts(file):
+    lines = file.readlines()
+    lines = lines[1:len(lines)]
+    for account_line in lines:
+        extract_bank_account(account_line)
+
+
+def extract_bank_account(account_line):
+    account_data = []
+    while account_line.find(';') != -1:
+        semicolon_pos = account_line.find(';')
+        data = account_line[0:semicolon_pos]
+        account_data.append(data)
+        # 20=5000;50=50000
+        if semicolon_pos + 1 == len(account_line):
+            break
+        else:
+            account_line = account_line[semicolon_pos + 1:len(account_line)]
+    add_bank_account(account_data)
+
+def add_bank_account(account_data):
+    accounts_list[account_data[0]] = {
+        'name': account_data[1],
+        'password': account_data[2],
+        'value': float(account_data[3]),
+        'admin': True if account_data[4] == 'True' else 'False',
+    }
+
 def load_bank_data():
     file = open_file_bank('r')
     read_money_slips(file)
+    file.close()
+    file = open_file_bank('r')
+    read_bank_accounts(file)
+    file.close()
 
 
 def delete_file():
